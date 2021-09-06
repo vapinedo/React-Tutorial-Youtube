@@ -1,17 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDom from 'react-dom'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import './index.css'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// State
+const books = [
+  {
+    id: 1,
+    author: 'John Doe',
+    title: 'Silence Hill',
+    img: 'https://images.cdn2.buscalibre.com/fit-in/180x180/d9/ee/d9ee3aefe2fc71402e3e373356e01426.jpg'
+  },
+  {
+    id: 2,
+    author: 'John Doe',
+    title: 'Yolo Aventuras',
+    img: 'https://images.cdn1.buscalibre.com/fit-in/180x180/21/20/2120b30f06bc887d3f9b450482c02ba9.jpg'
+  }
+];
+
+function BookList () {
+  return (
+    <section className="booklist">{books.map(book => {
+      return (
+        <Book key={book.id} book={book}></Book>
+      );
+    })}</section>
+  );
+}
+
+function Book (props) {
+  const { img, title, author } = props.book;
+  return (
+    <article className="book">
+      <img src={ img } alt={title} />
+      <h1>{ title }</h1>
+      <small className="author">{ author }</small>
+    </article>
+  )
+}
+
+ReactDom.render(<BookList />, document.getElementById('root'));
